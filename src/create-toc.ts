@@ -79,7 +79,7 @@ export const createToc = (
     const previousLevelHeading = getPreviousLevelHeading(includedHeadings, heading);
 
     const prefix = `${indent}${itemIndication}`;
-    const displayText = heading.heading;
+    const displayText = heading.heading.replaceAll(/[\[\]]/ig, '');
     let linkText;
 
     if (settings.useMarkdown && settings.githubCompat)
@@ -94,7 +94,7 @@ export const createToc = (
     // wikilink format
     if (!settings.useMarkdown)
       return `${prefix} [[#${linkText}|${displayText}]]`;
-    // markdown format
+    // Markdown format
     else 
       return `${prefix} [${displayText}](#${linkText})`;
   });
